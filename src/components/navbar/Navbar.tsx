@@ -4,7 +4,7 @@ function Navbar() {
       <div className="container justify-between flex flex-row ">
         <div className="flex gap-5 hover:text-white">
           <img src="./src/assets/bcio.svg"  alt="Icone Blockchain" />
-          <h1 className="text-2xl">Crypto Insights</h1>
+          <h1 className="text-2xl font-semibold">Crypto Insights</h1>
         </div>
         <div className="flex gap-10">
           <a href="" className="hover:text-white">Dashboard</a>
