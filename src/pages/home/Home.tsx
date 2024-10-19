@@ -34,18 +34,24 @@ function Home() {
   };
 
   return (
-    <div className="font-grotesk min-h-screen bg-min-bg pt-8 text-indigo-100 flex flex-col items-center">
+    <div className="font-grotesk bg-min-bg pt-8 text-indigo-100 flex flex-col items-center min-h-screen">
       <div className="container flex justify-center">
         <h1 className="font-semibold text-3xl">Dashboard</h1>
       </div>
-      <div className="container border border-gray-500 flex justify-center flex-col items-center mt-5 max-w-[55%] rounded-2xl">
-        <div className="flex flex-row justify-between items-center bg-[#212121] min-w-full border-b border-gray-500 min-h-9 font-semibold px-8 rounded-t-2xl">
-          <span className="w-32 flex flex-row justify-center">Asset</span>
-          <span className="w-32 flex flex-row justify-center">Price</span>
-          <span className="w-32 flex flex-row justify-center">Market Cap</span>
-          <span className="w-32 flex flex-row justify-center">Volume 24H</span>
-          <span className="w-32 flex flex-row justify-center">Change 24H</span>
+      <div className="container border border-gray-500 flex flex-col items-center mt-5 max-w-[80vw] sm:max-w-[90%] md:max-w-[60%] rounded-2xl min-h-[80vh]">
+        <div className="flex flex-row justify-between items-center bg-[#212121] w-full border-b border-gray-500 min-h-9 font-semibold px-4 md:px-8 rounded-t-2xl">
+          <span className="w-20 md:w-32 flex flex-row justify-center">
+            Asset
+          </span>
+          <span className="w-20 md:w-32 flex flex-row justify-center">
+            Price
+          </span>
+          <span className="w-20 md:w-32 flex flex-row justify-center">
+            Volume 24H
+          </span>
         </div>
+
+        {/* Loader */}
         {coins.length === 0 && (
           <MagnifyingGlass
             visible={true}
@@ -58,11 +64,15 @@ function Home() {
             color="#000"
           />
         )}
+
+        {/* Lista Moedas */}
         <div className="container">
           {coins.slice(0, visibleCoins).map((coin) => (
             <DataCoin key={coin.id_icon} coin={coin} />
           ))}
         </div>
+
+        {/* Botão para carregar mais moedas */}
         {visibleCoins < coins.length && (
           <div className="mt-4">
             <button
