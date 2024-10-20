@@ -1,21 +1,27 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Coin from "../../models/Coin";
-import { buscar } from "../../service/Service";
-import { ToastAlert } from "../../utils/ToastAlert";
+
 import { MagnifyingGlass } from "react-loader-spinner";
 import DataCoin from "../../components/coins/coin/DataCoin";
+import { GET } from "../../service/Service";
+import { ToastAlert } from "../../utils/ToastAlert";
 
+//Busca as criptomoedas
 function Home() {
   const [coins, setCoins] = useState<Coin[]>([]);
   const [visibleCoins, setVisibleCoins] = useState<number>(25);
 
-  async function buscarCoins() {
+  //faz a requisição para o backend
+  async function findCoins() {
     try {
-      await buscar("/cryptos", setCoins, {
+      await GET("/cryptos", setCoins, {
         headers: {
-          "X-CoinAPI-Key": "E545835B-8705-419C-A8B1-43C3EAC8BC80",
+          "X-CoinAPI-Key": "95d877fd-d259-4be1-8a2e-53416e58bda1",
         },
       });
+
+      //Armazena o timestamp da última requisição no localstorage
+      localStorage.setItem("lastRequest", Date.now().toString());
     } catch (error: any) {
       if (error.toString().includes("429")) {
         ToastAlert("Foi execedido o limite de requisições", "erro");
@@ -23,9 +29,31 @@ function Home() {
     }
   }
 
+  //Função que verifica o tempo de requisição e, se necessário, faz a requisição novamente
+  const checkRequestInterval = () => {
+    const lastRequest = localStorage.getItem("lastRequest");
+    const now = Date.now();
+
+    //Se não tiver timestamp, considera que passou tempo suficiente
+    const timePast = lastRequest ? now - parseInt(lastRequest) : 900001;
+
+    //Só faz a requisição se passou 15 minutos (900.000ms)
+    if (timePast >= 900000) {
+      findCoins();
+    }
+  };
+
+  //Configura um intervalo para realizar as requisições a cada 15 minutos
   useEffect(() => {
-    buscarCoins();
-  }, [coins.length]);
+    checkRequestInterval(); //verifica ao recarregar a página
+
+    const interval = setInterval(() => {
+      checkRequestInterval();
+    }, 900000); // 15 minutos
+
+    //Limpa o intervalo quando o componente e desmontado
+    return () => clearInterval(interval);
+  }, []);
 
   //Função para carregar mais moedas
   const loadMoreCoins = () => {
