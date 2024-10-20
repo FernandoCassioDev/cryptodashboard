@@ -66,7 +66,7 @@ function Home() {
       <div className="container flex justify-center">
         <h1 className="font-semibold text-3xl">Dashboard</h1>
       </div>
-      <div className="container border border-gray-500 flex flex-col items-center mt-5 max-w-[80vw] sm:max-w-[90%] md:max-w-[60%] rounded-2xl min-h-[80vh]">
+      <div className="container border border-gray-500 flex flex-col items-center mt-5 max-w-[80vw] sm:max-w-[90%] md:max-w-[60%] rounded-2xl min-h-[80vh] mb-20">
         <div className="flex flex-row justify-between items-center bg-[#212121] w-full border-b border-gray-500 min-h-9 font-semibold px-4 md:px-8 rounded-t-2xl">
           <span className="w-20 md:w-32 flex flex-row justify-center">
             Asset
@@ -74,7 +74,7 @@ function Home() {
           <span className="w-20 md:w-32 flex flex-row justify-center">
             Price
           </span>
-          <span className="w-20 md:w-32 flex flex-row justify-center">
+          <span className="hidden w-20 md:w-32 md:flex flex-row justify-center">
             Volume 24H
           </span>
         </div>
@@ -102,10 +102,10 @@ function Home() {
 
         {/* Botão para carregar mais moedas */}
         {visibleCoins < coins.length && (
-          <div className="mt-4">
+          <div className="flex min-h-14">
             <button
               onClick={loadMoreCoins}
-              className="bg-black text-white py-2 px-4 rounded-md"
+              className="flex items-center bg-black text-white my-2 px-2 rounded-md transition-all hover:duration-1000 hover:bg-slate-900 active:bg-slate-400 active:duration-0"
             >
               Carregar mais moedas
             </button>
