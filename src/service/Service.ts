@@ -5,7 +5,7 @@ const api = axios.create({
   //arrumar o endereço assim que subir em produção
 });
 
-export const buscar = async (
+export const GET = async (
   url: string,
   setDados: Function,
   header: Object
