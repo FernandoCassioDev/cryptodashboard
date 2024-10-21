@@ -64,7 +64,7 @@ function Dashboard() {
       <div className="container flex justify-center">
         <h1 className="font-semibold text-3xl">Dashboard</h1>
       </div>
-      <div className="container border border-gray-500 flex flex-col items-center mt-5 max-w-[80vw] sm:max-w-[90%] md:max-w-[80%] rounded-2xl min-h-[80vh] mb-20">
+      <div className="container border border-gray-500 flex flex-col items-center mt-5 max-w-[80vw] sm:max-w-[90%] md:max-w-[70%] rounded-2xl min-h-[80vh] mb-20">
         <div className="flex flex-row justify-between items-center bg-[#212121] w-full border-b border-gray-500 min-h-9 font-semibold px-4 md:px-8 rounded-t-2xl">
           <span className="w-20 md:w-32 flex flex-row justify-center">
             Asset
